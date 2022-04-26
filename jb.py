@@ -1,19 +1,20 @@
 
-from typing_extensions import Self
 import random
 import pygame
 
-class jablko():
+class Jablko():
+    #konstruktor klasy
     def __init__(self):
-        self.kolor=(18,27,11)
-        self.applePostion=(20,20)
+        self.kolor=(181,251,111)
+        self.applePosition=(20,20)
+        self.randomPosition()
     def setPosition(self,x,y):
-        self.applePostion=(x,y)
+        self.applePosition=(x,y)
     def getPosition(self):
-        return self.applePostion
-    def randomPostion(self):
+        return self.applePosition
+    def randomPosition(self):
         xApple=random.randint(0,9)*40+20
         yApple=random.randint(0,9)*40+20
         self.setPosition(xApple,yApple)
-def drawApple(self,OknoGry):
-        pygame.draw.circle(OknoGry,self.kolor,(self.applePostion[0],self.applePostion[1]),20)
+    def drawApple(self,OknoGry):
+        pygame.draw.circle(OknoGry,self.kolor,(self.applePosition[0],self.applePosition[1]),20)
