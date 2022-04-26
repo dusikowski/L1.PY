@@ -1,3 +1,4 @@
+
 import pygame
 
 
@@ -51,4 +52,4 @@ class Snake():
             #przejście góra
         if zmienna2<0:
             zmienna2=400
-        return (zmienna1,zmienna2)  
+        return (zmienna1,zmienna2)   
