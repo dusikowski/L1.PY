@@ -1,5 +1,7 @@
-
+from operator import imod
 import pygame
+import lekcjia1
+import jablko
 
 
 class Snake():
@@ -41,20 +43,23 @@ class Snake():
             del self.pozycje[0]
     #sprawdzenie krawędzi
     def checkBorder(self,zmienna1,zmienna2):
-        if zmienna1>=400:
+        if zmienna1>=lekcjia1.rozdzielosc:
             zmienna1=0
             #przejście dół
-        if zmienna2>=400:
+        if zmienna2>=lekcjia1.rozdzielosc:
             zmienna2=0
         #przejście strona lewa
         if zmienna1<0:
-            zmienna1=400
+            zmienna1=lekcjia1.rozdzielosc
             #przejście góra
         if zmienna2<0:
-            zmienna2=400
+            zmienna2=lekcjia1.rozdzielosc
         return (zmienna1,zmienna2)   
-        def biteMe(self,glowa):
-            for czesciCiala in self pozycje[::]:
-                 if glowa[0] == czesciCiala[0]and glowa[1]==czesCicala[1]==czesciCiala[1]:
+    def biteMe(self,glowa):
+        for czesciCiala in self.pozycje[::]:
+            if glowa[0] == czesciCiala[0] and glowa[1]==czesciCiala[1]:
                 nowePozycje=self.checkBorder(glowa[0]+80,glowa[1]-80)
-                self
+                self.pozycje=[nowePozycje]
+                self.dlugosc=1
+                self.punkty=0
+          
