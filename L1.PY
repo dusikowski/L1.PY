@@ -1,10 +1,8 @@
-
-
-from gettext import bind_textdomain_codeset
 import pygame
 import random
 import waz
 import jablko
+rozdzielosc=400
 
 iloscJablek=9
 def main():
@@ -18,7 +16,7 @@ def main():
     
     
     pygame.init()
-    OknoGry=pygame.display.set_mode((400,400),0,32)
+    OknoGry=pygame.display.set_mode((rozdzielosc,rozdzielosc),0,32)
     run=True
     zmienna1=120
     zmienna2=120
@@ -72,10 +70,9 @@ def main():
             #rysowanie jabłka
             print(positionApple[0])
             nrApple.drawApple(OknoGry)
-            #zajadanie weza
-            obiektWaz1 biteMe(glowa2)
-            obiektWaz2 biteMe(glowa1)
-
+        #zjadanie się węży nawzajem
+        obiektWaz1.biteMe(glowa2)
+        obiektWaz2.biteMe(glowa1)     
         
         czcionka=pygame.font.SysFont('comicsans',20)
         tekst1=czcionka.render("Punkty gracz 1: {0}".format(obiektWaz1.punkty),1,(255,255,255))
@@ -83,5 +80,3 @@ def main():
         OknoGry.blit(tekst1,(10,10))
         OknoGry.blit(tekst2,(10,30))
         pygame.display.update()
-
-main() 
