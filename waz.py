@@ -1,6 +1,6 @@
 from operator import imod
 import pygame
-import lekcjia1
+import lekcja1
 import jablko
 
 
@@ -11,6 +11,10 @@ class Snake():
         self.punkty=0
         self.pozycje=[(120,120)]
         self.kierunek=(0,1)
+        self.kolor=(255,25,0)
+    #ustawienie koloru weża
+    def setColor(self,color):
+            self.kolor=color
     def setDirection(self,kier):
         self.kierunek=kier
     #pobranie pozycji głowy
@@ -22,7 +26,7 @@ class Snake():
     def drawSnake(self,OknoGry):
          for wspolrzendne in self.pozycje[::-1]: 
             wazShape=pygame.Rect((wspolrzendne[0],wspolrzendne[1]),(40,40))
-            pygame.draw.rect(OknoGry,(255,192,203),wazShape)
+            pygame.draw.rect(OknoGry,(self.kolor),wazShape)
     def snakeMove(self):
         #ostatnia pozycja weza
         ostatniaPozycja=self.pozycje[-1]
@@ -43,17 +47,17 @@ class Snake():
             del self.pozycje[0]
     #sprawdzenie krawędzi
     def checkBorder(self,zmienna1,zmienna2):
-        if zmienna1>=lekcjia1.rozdzielosc:
+        if zmienna1>=lekcja1.rozdzielosc:
             zmienna1=0
             #przejście dół
-        if zmienna2>=lekcjia1.rozdzielosc:
+        if zmienna2>=lekcja1.rozdzielosc:
             zmienna2=0
         #przejście strona lewa
         if zmienna1<0:
-            zmienna1=lekcjia1.rozdzielosc
+            zmienna1=lekcja1.rozdzielosc
             #przejście góra
         if zmienna2<0:
-            zmienna2=lekcjia1.rozdzielosc
+            zmienna2=lekcja1.rozdzielosc
         return (zmienna1,zmienna2)   
     def biteMe(self,glowa):
         for czesciCiala in self.pozycje[::]:
@@ -62,4 +66,3 @@ class Snake():
                 self.pozycje=[nowePozycje]
                 self.dlugosc=1
                 self.punkty=0
-          
