@@ -1,7 +1,6 @@
-
 import random
 import pygame
-import lekcjia1
+import lekcja1
 class Jablko():
     #konstruktor klasy
     def __init__(self):
@@ -13,7 +12,7 @@ class Jablko():
     def getPosition(self):
         return self.applePosition
     def randomPosition(self):
-        iloscKratek=lekcjia1.rozdzielczosc//40-1
+        iloscKratek=lekcja1.rozdzielczosc//40-1
         xApple=random.randint(0,iloscKratek)*40+20
         yApple=random.randint(0,iloscKratek)*40+20
         self.setPosition(xApple,yApple)
