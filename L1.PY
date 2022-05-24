@@ -1,22 +1,26 @@
+from turtle import pos, position
 import pygame
 import random
 import waz
 import jablko
-rozdzielosc=800
+rozdzielczosc=400
 obiektWaz1=waz.Snake()
 obiektWaz2=waz.Snake()
-    
+def zmienkolorWaz1(color):
+    obiektWaz1.setcolor(color)
+def zmienkolorWaz2(color):
+    obiektWaz2.setcolor(color)
 iloscJablek=9
 def main():
-#tworzenie jabłek
     objectApple=[]
     for nrApple in range(0,iloscJablek):
         objectApple.append(jablko.Jablko())
-
-
     
+    
+    xApple=random.randint(0,9)*40+20
+    yApple=random.randint(0,9)*40+20
     pygame.init()
-    OknoGry=pygame.display.set_mode((rozdzielosc,rozdzielosc),0,32)
+    OknoGry=pygame.display.set_mode((rozdzielczosc,rozdzielczosc),0,32)
     run=True
     zmienna1=120
     zmienna2=120
@@ -25,7 +29,7 @@ def main():
         OknoGry.fill((0,0,0))
         pygame.time.delay(200)
         
-         
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run=False
@@ -39,6 +43,7 @@ def main():
                     obiektWaz1.setDirection((-1,0))
                 elif event.key == pygame.K_RIGHT:
                     obiektWaz1.setDirection((1,0))
+
                 elif event.key == pygame.K_w:
                     obiektWaz2.setDirection((0,-1))
                 elif event.key == pygame.K_s:
@@ -46,37 +51,34 @@ def main():
                 elif event.key == pygame.K_a:
                     obiektWaz2.setDirection((-1,0))
                 elif event.key == pygame.K_d:
-                    obiektWaz2.setDirection((1,0))    
+                    obiektWaz2.setDirection((1,0))
         #ruch weza        
-        obiektWaz1.snakeMove() 
+        obiektWaz1.snakeMove()  
         obiektWaz2.snakeMove()      
         #rysowanie weza
-        obiektWaz1.drawSnake(OknoGry)   
-        obiektWaz2.drawSnake(OknoGry)     
+        obiektWaz1.drawSnake(OknoGry)  
+        obiektWaz2.drawSnake(OknoGry)        
         #pobranie pozycji glowy weza
         glowa1=obiektWaz1.pozycje[-1]
         glowa2=obiektWaz2.pozycje[-1]
         #waż zjada jabłko
         for nrApple in objectApple[::]:
-            positionApple=nrApple.getPosition()
-            #zjadanie jablka przez pierwszego węża
-            if glowa1[0]==positionApple[0]-20 and glowa1[1]==positionApple[1]-20:
-                obiektWaz1.eating()
-                nrApple.randomPosition()
-            #zjadanie jablka przez drugiego węża
-            if glowa2[0]==positionApple[0]-20 and glowa2[1]==positionApple[1]-20:
-                obiektWaz2.eating()
-                nrApple.randomPosition()
-            #rysowanie jabłka
-            print(positionApple[0])
-            nrApple.drawApple(OknoGry)
-        #zjadanie się węży nawzajem
+                positionApple=nrApple.getPosition()
+                if glowa1[0]==positionApple[0]-20 and glowa1[1]==positionApple[1]-20:
+                    obiektWaz1.eating()
+                    nrApple.randomPosition()
+                if glowa2[0]==positionApple[0]-20 and glowa2[1]==positionApple[1]-20:
+                    obiektWaz2.eating()
+                    nrApple.randomPosition()                    
+        #Rysowanie jabłka
+                nrApple.drawApple(OknoGry)
+        #Zjadanie sie wezy nawzajem
         obiektWaz1.biteMe(glowa2)
-        obiektWaz2.biteMe(glowa1)     
+        obiektWaz2.biteMe(glowa1)
         
         czcionka=pygame.font.SysFont('comicsans',20)
-        tekst1=czcionka.render("Punkty gracz 1: {0}".format(obiektWaz1.punkty),1,(255,255,255))
-        tekst2=czcionka.render("Punkty gracz 2: {0}".format(obiektWaz2.punkty),1,(255,255,255))
+        tekst1=czcionka.render("Gracz 1: {0}".format(obiektWaz1.punkty),1,(255,255,255))
         OknoGry.blit(tekst1,(10,10))
-        OknoGry.blit(tekst2,(10,30))
+        tekst2=czcionka.render("Gracz 2: {0}".format(obiektWaz2.punkty),1,(255,255,255))
+        OknoGry.blit(tekst2,(10,40))
         pygame.display.update()
